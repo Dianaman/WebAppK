@@ -115,13 +115,19 @@ div .modal-dialog, div.modal
 	z-index: 3;
 	height:50%;
 }
-div .modal-content{
+div .modal-content
+{
 	position:absolute;
 	z-index: 4;
 
 }
-button.close, button.close span
+div .modal-backdrop fade in
 {
-	position:relative;
-	z-index: 7;
+	position:absolute;
+	z-index: 3;
+}
+button.close, button.close span*/
+{
+	position:absolute;
+	z-index: 1600;
 }
