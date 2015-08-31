@@ -47,7 +47,7 @@ footer
 	left: 0px;
 	background: url("http://www.actions.com.br/site/wp-content/uploads/2015/08/bg-binary.jpg") 
 	no-repeat fixed royalblue;
-	z-index: 1;
+	/*z-index: 1;*/
 	padding-top:20vh;
 	position:absolute;
 }
@@ -107,7 +107,7 @@ div .inside
 	font-family: consolas;
 }
 
-div .modal-dialog, div.modal
+/*div .modal-dialog, div.modal
 {
 	top: 10%;
 	left: 25%;
@@ -125,8 +125,8 @@ div .modal-backdrop fade in
 {
 	position:absolute;
 	z-index: 3;
-}
-button.close, button.close span*/
+}*/
+button.close, button.close span
 {
 	position:absolute;
 	z-index: 1600;
