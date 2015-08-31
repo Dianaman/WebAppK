@@ -1,5 +1,7 @@
 <?php 	
 	header('Content-type: application/json');
+	//problemas de seguridad entonces se le agrega la siguiente liniea
+	header('Access-Control-Allow-Origin: *');
  	
  	//DECLARACION DE MOCKS Y CONSTANTES
 	define("MOCK_USER", "Diana");
