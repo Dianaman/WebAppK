@@ -107,6 +107,12 @@ div .inside
 	font-family: consolas;
 }
 
+div .navigation
+{
+	background-color:white;
+	opacity:0.8;
+	font-family: consolas;
+}
 /*div .modal-dialog, div.modal
 {
 	top: 10%;

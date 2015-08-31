@@ -14,12 +14,12 @@ Auth.prototype.login = function() {
 
 //DESCRIPCION
 Auth.prototype.logout = function(){
-
+	Ajax.send(this.usuario, this.pass);
 }
 
 //DESCRIPCION
 Auth.prototype.signup = function(){
-
+	Ajax.send(this.usuario, this.pass);
 }
 
 

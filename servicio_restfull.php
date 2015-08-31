@@ -34,12 +34,16 @@
 
     	}
 
-    	function logout(){
+    	function logout($user, $pass){
+    		$tomar_usuario = $_GET['usuario'];
+			$tomar_contra = $_GET['contra'];
     		echo json_encode($response_logout);
 
     	}
     	
-    	function signup(){
+    	function signup($user, $pass){
+    		$response_signup["user"] = "user";
+			$response_signup["pass"] = "pass";
     		echo json_encode($response_signup);
     	}
 
