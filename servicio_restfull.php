@@ -33,17 +33,25 @@
 			echo json_encode($response_login);
 
     	}
+    	//Error: 
+    	//Sea la funcion que sea siempre entra en login,
+    	//no importa si entro con signBtn,
+    	//me termina tirando si soy o no bienvenida.
 
     	function logout($user, $pass){
-    		$tomar_usuario = $_GET['usuario'];
-			$tomar_contra = $_GET['contra'];
-    		echo json_encode($response_logout);
-
+    		$tomar_usuario = $_GET["user"];
+			$tomar_contra = $_GET["pass"];
+    		
+			$response_login["user"] = "user";
+			$response_login["pass"] = "pass";
+			echo json_encode($response_logout);	
     	}
     	
     	function signup($user, $pass){
-    		$response_signup["user"] = "user";
-			$response_signup["pass"] = "pass";
+    		
+			$response_login["code"] = 202;
+			$response_login["msg"] = "Registro exitoso!";
+			$response_login["user"] = "user"; 
     		echo json_encode($response_signup);
     	}
 

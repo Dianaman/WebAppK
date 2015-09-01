@@ -22,6 +22,7 @@ var Ajax = {
       {
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
         {
+          console.log("login llego a ajax.js");
           var resEstatus = JSON.parse(xmlhttp.responseText);
           //document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
           $("#okModal").modal('show');
@@ -32,6 +33,7 @@ var Ajax = {
       
         if (xmlhttp.readyState==4 && xmlhttp.status==202)
         {
+          console.log(xmlhttp.responseText);
           var resEstatus = JSON.parse(xmlhttp.responseText);
           $("#okModal").modal('show');
           document.getElementById("modal-header").innerHTML=resEstatus.msg;
@@ -81,7 +83,46 @@ var Ajax = {
   }  */
 }
 
+var AjaxSign = {
 
+  send: function(usuario, pass){
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function()
+      {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+          console.log("Signup llego a ajax.js");
+          var resEstatus = JSON.parse(xmlhttp.responseText);
+          //document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+          $("#okModal").modal('show');
+          document.getElementById("modal-header").innerHTML=resEstatus.msg;
+          document.getElementById("modal-header").style.backgroundColor = "green";
+          //console.log(xmlhttp.responseText);
+        }
+      
+        if (xmlhttp.readyState==4 && xmlhttp.status==202)
+        {
+          console.log(xmlhttp.responseText);
+          var resEstatus = JSON.parse(xmlhttp.responseText);
+          $("#okModal").modal('show');
+          document.getElementById("modal-header").innerHTML=resEstatus.msg;
+          document.getElementById("modal-header").style.backgroundColor = "red";
+        }
+      }
+    var UrlToSend = DONDE + PARAM_USUARIO + usuario + "&" + PARAM_PASS + pass;
+
+    xmlhttp.open("post", UrlToSend, true); // true for asynchronous 
+    xmlhttp.send(null);
+  }  
+}
 
 //http://getbootstrap.com/examples/signin/
 
