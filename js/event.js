@@ -17,9 +17,10 @@ document.getElementById("loginBtn").addEventListener("click", function(){
 //ATRAPA EL EVENTO CLICK CON SIGNUPBTN
 document.getElementById("signBtn").addEventListener("click", function(){
     console.log("atrapo el evento signBtn");
-    var newusuario = document.getElementById("userSign").value;
-    var newpass = document.getElementById("passwordSign").value;
-    var auth = new Auth(newusuario, "email@email.com", newpass);
+    var usuario = document.getElementById("userSign").value;
+    var pass = document.getElementById("passwordSign").value;
+    var mail = document.getElementById("mailSign").value;
+    var auth = new Auth(usuario, mail, pass);
     auth.signup();  
 });
 

@@ -1,4 +1,5 @@
 <?php 	
+//Paso 5
 	header('Content-type: application/json');
 	//problemas de seguridad entonces se le agrega la siguiente liniea
 	header('Access-Control-Allow-Origin: *');
@@ -39,19 +40,19 @@
     	//me termina tirando si soy o no bienvenida.
 
     	function logout($user, $pass){
-    		$tomar_usuario = $_GET["user"];
-			$tomar_contra = $_GET["pass"];
+    		//$tomar_usuario = $_GET["user"];
+			//$tomar_contra = $_GET["pass"];
     		
-			$response_login["user"] = "user";
-			$response_login["pass"] = "pass";
+			$response_logout["user"] = "user";
+			$response_logout["pass"] = "pass";
 			echo json_encode($response_logout);	
     	}
     	
-    	function signup($user, $pass){
+    	function signup($user, $pass, $mail){
     		
-			$response_login["code"] = 202;
-			$response_login["msg"] = "Registro exitoso!";
-			$response_login["user"] = "user"; 
+			$response_signup["code"] = 202;
+			$response_signup["msg"] = "Registro exitoso!";
+			$response_signup["user"] = "user"; 
     		echo json_encode($response_signup);
     	}
 

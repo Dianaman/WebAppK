@@ -1,7 +1,9 @@
+//Paso 3
+
 "use strict";
 function Auth(u,e,p) {
   this.usuario = u;
-  this.email = e;
+  this.mail = e;
   this.pass = p;
 }
 
@@ -22,7 +24,7 @@ Auth.prototype.logout = function(){
 //DESCRIPCION
 Auth.prototype.signup = function(){
 	console.log("Signup llego a Auth.js");
-	AjaxSign.send(this.usuario, this.pass);
+	AjaxSign.send(this.usuario, this.pass, this.mail);
 }
 
 
