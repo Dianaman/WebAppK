@@ -26,12 +26,12 @@
 			if($user == MOCK_USER && $pass == MOCK_PASS){
 				$response_login["code"] = 202;
 				$response_login["msg"] = "BIENVENIDA!";
-				$response_login["user"] = "user"; 
+				$response_login["user"] = $user; 
 			}
 			else{
 				$response_login["code"] = 404;
 				$response_login["msg"] = "No es bienvenido!";
-				$response_login["user"] = "user"; 
+				$response_login["user"] = $user; 
 			}
 			echo json_encode($response_login);
     	}
@@ -43,23 +43,43 @@
     	function logout($user, $pass){
     		$response_logout["code"] = 202;
 			$response_logout["msg"] = "Hasta la vista, baby";
-			$response_logout["user"] = "user";
+			$response_logout["user"] = $user;
 			echo json_encode($response_logout);	
     	}
     	
     	function signup($user, $pass){
 			$response_signup["code"] = 202;
 			$response_signup["msg"] = "Registro exitoso!";
-			$response_signup["user"] = "user"; 
+			$response_signup["user"] = $user; 
     		echo json_encode($response_signup);
     	}
 
 	}
 
 	//TOMAR DATOS QUE VIENEN POR GET
-	$tomar_usuario = $_GET['usuario'];
-	$tomar_contra = $_GET['contra'];
-	$tomar_ruta = $_GET['ruta'];
+	//$tomar_usuario = $_GET['usuario'];
+	//$tomar_contra = $_GET['contra'];
+	//$tomar_ruta = $_GET['ruta'];
+
+
+	if (isset($_REQUEST['usuario'])) {
+		$tomar_usuario = $_GET['usuario'];
+	} else {
+		$tomar_usuario = (json_decode(file_get_contents('php://input'), true)["usuario"]);
+	}
+
+	if (isset($_REQUEST['contra'])) {
+		$tomar_contra = $_GET['contra'];
+	} else {
+		$tomar_contra = (json_decode(file_get_contents('php://input'), true)["contra"]);
+	}
+
+	if (isset($_REQUEST['ruta'])) {
+		$tomar_ruta = $_GET['ruta'];
+	} else {
+		$tomar_ruta = (json_decode(file_get_contents('php://input'), true)["ruta"]);
+	}
+
 	//echo $_POST['ruta'];
 
 	//CREAR OBJETO

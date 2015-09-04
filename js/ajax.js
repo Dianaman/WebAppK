@@ -27,12 +27,13 @@ var Ajax = {
     {
       if (xmlhttp.readyState==4 && xmlhttp.status==200)
       {
-        console.log("login llego a ajax.js");
+        console.log(xmlhttp.responseText);
         var resEstatus = JSON.parse(xmlhttp.responseText);
         //document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
         $("#okModal").modal('show');
         document.getElementById("modal-header").innerHTML=resEstatus.msg;
         document.getElementById("modal-header").style.backgroundColor = "green";
+        document.getElementById("modal-body").innerHTML=resEstatus.user;
         //console.log(xmlhttp.responseText);
       }
     
@@ -43,6 +44,7 @@ var Ajax = {
         $("#okModal").modal('show');
         document.getElementById("modal-header").innerHTML=resEstatus.msg;
         document.getElementById("modal-header").style.backgroundColor = "red";
+        document.getElementById("modal-body").innerHTML=resEstatus.user;
       }
     }
 
