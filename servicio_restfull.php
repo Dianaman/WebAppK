@@ -35,10 +35,6 @@
 			}
 			echo json_encode($response_login);
     	}
-    	//Error: 
-    	//Sea la funcion que sea siempre entra en login,
-    	//no importa si entro con signBtn,
-    	//me termina tirando si soy o no bienvenida.
 
     	function logout($user, $pass){
     		$response_logout["code"] = 202;
@@ -100,4 +96,9 @@
 	//$auth->login($tomar_usuario, $tomar_contra, $tomar_ruta);
 
 
+	if (isset($_REQUEST['idioma'])) {
+		$tomar_usuario = $_GET['idioma'];
+	} else {
+		$tomar_usuario = (json_decode(file_get_contents('php://input'), true)["idioma"]);
+	}
 ?>
