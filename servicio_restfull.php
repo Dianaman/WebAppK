@@ -76,8 +76,27 @@
 		$tomar_ruta = (json_decode(file_get_contents('php://input'), true)["ruta"]);
 	}
 
-	//echo $_POST['ruta'];
 
+	if (isset($_REQUEST['idioma'])) {
+		$idioma = $_GET['idioma'];
+	} else {
+		$idioma = (json_decode(file_get_contents('php://input'), true)["idioma"]);
+	}
+
+	isset($_REQUEST['mensaje']) ? $mensaje = $_GET['mensaje'] : $mensaje = (json_decode(file_get_contents('php://input'), true)["idioma"]);
+	$valmsg = new Valmsg();
+	//echo $_POST['ruta'];
+	switch($idioma){
+		case 1:
+			$valmsg->en($mensaje);
+			break;
+		case 2:
+			$valmsg->es($mensaje);
+			break;
+		case 3:
+			$valmsg->pv($mensaje);
+			break;
+	}
 	//CREAR OBJETO
 	$auth = new Auth();
 
@@ -92,13 +111,45 @@
 		case "signup":
 			$auth->signup($tomar_usuario, $tomar_contra);
 			break;
+		case "":
+			break;
 	}
 	//$auth->login($tomar_usuario, $tomar_contra, $tomar_ruta);
+	
 
+	
+	/*switch($idioma){
+		case 1:
+			$valmsg->en($mensaje);
+			break;
+		case 2:
+			$valmsg->es($mensaje);
+			break;
+		case 3:
+			$valmsg->pv($mensaje);
+			break;
+	}*/
+	$response_en = array("id"=>"number", "msg"=>"mensaje");
+	$response_es = array("id"=>"number", "msg"=>"mensaje");
+	$response_pv = array("id"=>"number", "msg"=>"mensaje");
+	
 
-	if (isset($_REQUEST['idioma'])) {
-		$tomar_usuario = $_GET['idioma'];
-	} else {
-		$tomar_usuario = (json_decode(file_get_contents('php://input'), true)["idioma"]);
+	class Valmsg
+	{
+		function en($mensaje){
+			$response_en["id"] = "1";
+			$response_en["msg"] = "m_e";
+			echo json_encode($response_en);
+		}
+		function es($mensaje){
+			$response_es["id"] = "2";
+			$response_es["msg"] = "m_e";
+			echo json_encode($response_es);
+		}
+		function pv($mensaje){
+			$response_pv["id"] = "3";
+			$response_pv["msg"] = "m_e";
+			echo json_encode($response_pv);
+		}
 	}
 ?>
