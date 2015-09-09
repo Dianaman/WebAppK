@@ -10,9 +10,10 @@
  	//DECLARACION DE MOCKS Y CONSTANTES
 	define("MOCK_USER", "Diana");
 	define("MOCK_PASS", 123456);
+
 	$response_login = array("code"=>"number", "msg"=>"mensaje", "user"=>"user");
 	$response_logout = array("code"=>"number", "msg"=>"mensaje", "user"=>"user");
-	$response_signup = array("code"=>"number", "msg"=>"mensaje", "user"=>"user");
+	$response_signup = array("code"=>"number", "msg"=>"mensaje", "m"=>"m", "user"=>"user");
 	
 	//DECLARACION DE LA CLASE
 	class Auth{
@@ -46,6 +47,7 @@
     	function signup($user, $pass){
 			$response_signup["code"] = 202;
 			$response_signup["msg"] = "Registro exitoso!";
+			$response_signup["m"] = "m";
 			$response_signup["user"] = $user; 
     		echo json_encode($response_signup);
     	}
@@ -76,15 +78,15 @@
 		$tomar_ruta = (json_decode(file_get_contents('php://input'), true)["ruta"]);
 	}
 
-
+/*
 	if (isset($_REQUEST['idioma'])) {
 		$idioma = $_GET['idioma'];
 	} else {
 		$idioma = (json_decode(file_get_contents('php://input'), true)["idioma"]);
 	}
-
+/*
 	isset($_REQUEST['mensaje']) ? $mensaje = $_GET['mensaje'] : $mensaje = (json_decode(file_get_contents('php://input'), true)["idioma"]);
-	$valmsg = new Valmsg();
+	/*$valmsg = new Valmsg();
 	//echo $_POST['ruta'];
 	switch($idioma){
 		case 1:
@@ -96,7 +98,7 @@
 		case 3:
 			$valmsg->pv($mensaje);
 			break;
-	}
+	}*/
 	//CREAR OBJETO
 	$auth = new Auth();
 
@@ -129,6 +131,8 @@
 			$valmsg->pv($mensaje);
 			break;
 	}*/
+
+	/*
 	$response_en = array("id"=>"number", "msg"=>"mensaje");
 	$response_es = array("id"=>"number", "msg"=>"mensaje");
 	$response_pv = array("id"=>"number", "msg"=>"mensaje");
@@ -152,4 +156,6 @@
 			echo json_encode($response_pv);
 		}
 	}
+	*/
+	//echo "servicio_restful connected";
 ?>
