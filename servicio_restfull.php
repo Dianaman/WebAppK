@@ -1,6 +1,6 @@
 <?php 	
 //Paso 5
-
+	
 	header('Content-type: application/json');
 	//problemas de seguridad entonces se le agrega la siguiente liniea
 	header('Access-Control-Allow-Origin: *');
@@ -11,9 +11,10 @@
 	define("MOCK_USER", "Diana");
 	define("MOCK_PASS", 123456);
 
-	$response_login = array("code"=>"number", "msg"=>"mensaje", "user"=>"user");
-	$response_logout = array("code"=>"number", "msg"=>"mensaje", "user"=>"user");
+	$response_login = array("code"=>"number", "msg"=>"mensaje", "m"=>"m", "user"=>"user");
+	$response_logout = array("code"=>"number", "msg"=>"mensaje", "m"=>"m", "user"=>"user");
 	$response_signup = array("code"=>"number", "msg"=>"mensaje", "m"=>"m", "user"=>"user");
+	$response_delete = array("code"=>"number", "msg"=>"mensaje", "m"=>"m", "user"=>"user");
 	
 	//DECLARACION DE LA CLASE
 	class Auth{
@@ -27,11 +28,13 @@
 			if($user == MOCK_USER && $pass == MOCK_PASS){
 				$response_login["code"] = 202;
 				$response_login["msg"] = "BIENVENIDA!";
+				$response_login["m"] = "m";
 				$response_login["user"] = $user; 
 			}
 			else{
 				$response_login["code"] = 404;
 				$response_login["msg"] = "No es bienvenido!";
+				$response_login["m"] = "m_e";
 				$response_login["user"] = $user; 
 			}
 			echo json_encode($response_login);
@@ -40,65 +43,87 @@
     	function logout($user, $pass){
     		$response_logout["code"] = 202;
 			$response_logout["msg"] = "Hasta la vista, baby";
+			$response_logout["m"] = "m";
 			$response_logout["user"] = $user;
 			echo json_encode($response_logout);	
     	}
     	
     	function signup($user, $pass){
-			$response_signup["code"] = 202;
-			$response_signup["msg"] = "Registro exitoso!";
-			$response_signup["m"] = "m";
-			$response_signup["user"] = $user; 
+    		if($user != MOCK_USER){
+				$response_signup["code"] = 202;
+				$response_signup["msg"] = "Registro exitoso!";
+				$response_signup["m"] = "m_c";
+				$response_signup["user"] = $user; 
+			}
+			else {
+				$response_signup["code"] = 404;
+				$response_signup["msg"] = "Error en el registro!";
+				$response_signup["m"] = "m_c_e";
+				$response_signup["user"] = $user; 
+			}
     		echo json_encode($response_signup);
     	}
 
+    	function read($user, $pass){
+    		if($user == MOCK_USER){
+				$response_signup["code"] = 202;
+				$response_signup["msg"] = "Registro exitoso!";
+				$response_signup["m"] = "m_r";
+				$response_signup["user"] = $user; 
+			}
+			else {
+				$response_signup["code"] = 404;
+				$response_signup["msg"] = "Error en el registro!";
+				$response_signup["m"] = "m_r_e";
+				$response_signup["user"] = $user; 
+			}
+    		echo json_encode($response_signup);
+    	}
+
+    	function update($user, $pass){
+    		if($user == MOCK_USER){
+				$response_signup["code"] = 202;
+				$response_signup["msg"] = "Registro exitoso!";
+				$response_signup["m"] = "m_u";
+				$response_signup["user"] = $user; 
+			}
+			else {
+				$response_signup["code"] = 404;
+				$response_signup["msg"] = "Error en el registro!";
+				$response_signup["m"] = "m_u_e";
+				$response_signup["user"] = $user; 
+			}
+    		echo json_encode($response_signup);
+    	}
+    	function delete($user, $pass){
+    		if($user == MOCK_USER){
+				$response_delete["code"] = 202;
+				$response_delete["msg"] = "Usuario eliminado!";
+				$response_delete["m"] = "m_d";
+				$response_delete["user"] = $user;
+			} 
+			else {
+				$response_delete["code"] = 404;
+				$response_delete["msg"] = "Usuario no encontrado";
+				$response_delete["m"] = "m_d_e";
+				$response_delete["user"] = $user; 
+			}
+    		echo json_encode($response_delete);
+    	}
+
+
 	}
 
-	//TOMAR DATOS QUE VIENEN POR GET
-	//$tomar_usuario = $_GET['usuario'];
-	//$tomar_contra = $_GET['contra'];
-	//$tomar_ruta = $_GET['ruta'];
+	if(isset($_REQUEST['usuario'])) { $tomar_usuario = $_GET['usuario'];}
+	else {$tomar_usuario = (json_decode(file_get_contents('php://input'), true)["usuario"]); }
+
+	if(isset($_REQUEST['contra']) )	{ $tomar_contra = $_GET['contra'];}
+	else {$tomar_contra = (json_decode(file_get_contents('php://input'), true)["contra"]); }
+
+	if(isset($_REQUEST['ruta']) )	{ $tomar_ruta = $_GET['ruta'];}
+	else {$tomar_ruta = (json_decode(file_get_contents('php://input'), true)["ruta"]); }
 
 
-	if (isset($_REQUEST['usuario'])) {
-		$tomar_usuario = $_GET['usuario'];
-	} else {
-		$tomar_usuario = (json_decode(file_get_contents('php://input'), true)["usuario"]);
-	}
-
-	if (isset($_REQUEST['contra'])) {
-		$tomar_contra = $_GET['contra'];
-	} else {
-		$tomar_contra = (json_decode(file_get_contents('php://input'), true)["contra"]);
-	}
-
-	if (isset($_REQUEST['ruta'])) {
-		$tomar_ruta = $_GET['ruta'];
-	} else {
-		$tomar_ruta = (json_decode(file_get_contents('php://input'), true)["ruta"]);
-	}
-
-/*
-	if (isset($_REQUEST['idioma'])) {
-		$idioma = $_GET['idioma'];
-	} else {
-		$idioma = (json_decode(file_get_contents('php://input'), true)["idioma"]);
-	}
-/*
-	isset($_REQUEST['mensaje']) ? $mensaje = $_GET['mensaje'] : $mensaje = (json_decode(file_get_contents('php://input'), true)["idioma"]);
-	/*$valmsg = new Valmsg();
-	//echo $_POST['ruta'];
-	switch($idioma){
-		case 1:
-			$valmsg->en($mensaje);
-			break;
-		case 2:
-			$valmsg->es($mensaje);
-			break;
-		case 3:
-			$valmsg->pv($mensaje);
-			break;
-	}*/
 	//CREAR OBJETO
 	$auth = new Auth();
 
@@ -113,14 +138,22 @@
 		case "signup":
 			$auth->signup($tomar_usuario, $tomar_contra);
 			break;
+		case "delete":
+			$auth->delete($tomar_usuario, $tomar_contra);
+			break;
 		case "":
 			break;
 	}
-	//$auth->login($tomar_usuario, $tomar_contra, $tomar_ruta);
-	
-
-	
-	/*switch($idioma){
+/*
+	if (isset($_REQUEST['idioma'])) {
+		$idioma = $_GET['idioma'];
+	} else {
+		$idioma = (json_decode(file_get_contents('php://input'), true)["idioma"]);
+	}
+	isset($_REQUEST['mensaje']) ? $mensaje = $_GET['mensaje'] : $mensaje = (json_decode(file_get_contents('php://input'), true)["idioma"]);
+	/*$valmsg = new Valmsg();
+	//echo $_POST['ruta'];
+	switch($idioma){
 		case 1:
 			$valmsg->en($mensaje);
 			break;
@@ -130,9 +163,8 @@
 		case 3:
 			$valmsg->pv($mensaje);
 			break;
-	}*/
+	}
 
-	/*
 	$response_en = array("id"=>"number", "msg"=>"mensaje");
 	$response_es = array("id"=>"number", "msg"=>"mensaje");
 	$response_pv = array("id"=>"number", "msg"=>"mensaje");
